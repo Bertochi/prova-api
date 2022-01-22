@@ -31,6 +31,11 @@ public class AtivoResource {
 		List<AtivoDTO> list = service.findAll().stream().map(obj -> new AtivoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(list);
 	}
+	@GetMapping(value = "/nome/{nome}")
+	public ResponseEntity<AtivoDTO> findByNome(@PathVariable String nome){
+		 AtivoDTO obj = new AtivoDTO (service.findByNome(nome));
+		 return ResponseEntity.ok().body(obj);
+	}
 	
 	
 }

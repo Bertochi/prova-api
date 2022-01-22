@@ -22,5 +22,9 @@ public class AtivoService {
 	public List<Ativo> findAll() {
 		return repository.findAll();
 	}
-
+	public Ativo findByNome(String nome) {
+		String nomeUpper = nome.toUpperCase();
+		Optional<Ativo> obj = repository.findByNome(nomeUpper);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+	}
 }
