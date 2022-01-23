@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.RafaelBertochi.domain.Ativo;
 import com.RafaelBertochi.domain.Ordem;
+import com.RafaelBertochi.domain.Tipo;
 import com.RafaelBertochi.dtos.OrdemDTO;
 import com.RafaelBertochi.repositories.OrdemRepository;
 import com.RafaelBertochi.services.exceptions.ObjectNotFoundException;
@@ -37,7 +38,7 @@ public class OrdemService {
 		Ordem newObj = new Ordem();
 		newObj.setId(obj.getId());
 		newObj.setQuantidade(obj.getQuantidade());
-		newObj.setTipo(obj.getTipo());
+		newObj.setTipo(Tipo.toEnum(obj.getTipo().getCod()));
 		newObj.setValor(obj.getValor());
 		Ativo at =  ativoService.findById(obj.getAtivo());
 				

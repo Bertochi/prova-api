@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Ordem implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,13 +24,14 @@ public class Ordem implements Serializable {
 	private Integer tipo;
 	private Integer quantidade;
 	private Double valor;
+	@JsonFormat(pattern = "dd/MM/yyyy  HH:mm")
 	private LocalDateTime data;
 
-	public Ordem(Integer id, Ativo ativo, Integer tipo, Integer quantidade, Double valor) {
+	public Ordem(Integer id, Ativo ativo, Tipo tipo, Integer quantidade, Double valor) {
 		super();
 		this.id = id;
 		this.ativo = ativo;
-		this.tipo = tipo;
+		this.tipo = tipo.getCod();
 		this.quantidade = quantidade;
 		this.valor = valor;
 		this.setData(LocalDateTime.now());
@@ -54,12 +57,12 @@ public class Ordem implements Serializable {
 		this.ativo = ativo;
 	}
 
-	public Integer getTipo() {
-		return tipo;
+	public Tipo getTipo() {
+		return Tipo.toEnum(this.tipo);
 	}
 
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo.getCod();
 	}
 
 	public Integer getQuantidade() {

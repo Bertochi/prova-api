@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import javax.validation.constraints.NotNull;
 
 import com.RafaelBertochi.domain.Ordem;
+import com.RafaelBertochi.domain.Tipo;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class OrdemDTO implements Serializable {
 		private static final long serialVersionUID = 1L;
@@ -19,13 +21,14 @@ public class OrdemDTO implements Serializable {
 		private Integer quantidade;
 		@NotNull(message = "O campo VALOR é requerido")
 		private Double valor;
+		@JsonFormat(pattern = "dd/MM/yyyy  HH:mm")
 		private LocalDateTime data;
 
 		public OrdemDTO(Ordem obj) {
 			super();
 			this.id = obj.getId();
 			this.ativo = obj.getAtivo().getId();
-			this.tipo = obj.getTipo();
+			this.tipo = obj.getTipo().getCod();
 			this.quantidade = obj.getQuantidade();
 			this.valor = obj.getValor();
 			this.setData(LocalDateTime.now());
@@ -51,8 +54,8 @@ public class OrdemDTO implements Serializable {
 			this.ativo = ativo;
 		}
 
-		public Integer getTipo() {
-			return tipo;
+		public Tipo getTipo() {
+			return Tipo.toEnum(this.tipo);
 		}
 
 		public void setTipo(Integer tipo) {
