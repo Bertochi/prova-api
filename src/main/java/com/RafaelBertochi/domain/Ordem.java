@@ -39,6 +39,7 @@ public class Ordem implements Serializable {
 
 	public Ordem() {
 		super();
+		this.setData(LocalDateTime.now());
 	}
 
 	public Integer getId() {
