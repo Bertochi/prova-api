@@ -46,6 +46,9 @@ public class OrdemService {
 		newObj.setData(LocalDateTime.now());
 		return repository.save(newObj);
 	}
+	public List<Ordem> findOrdemByAtivo(Integer id) {
+		return repository.findOrdemByAtivo(id);
+	}
 
 	
 }

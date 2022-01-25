@@ -44,5 +44,11 @@ public class OrdemResource {
 				 .buildAndExpand(obj.getId()).toUri();
 		 return ResponseEntity.created(uri).build();
 	}
+	@GetMapping(value = "/ativo/{id}")
+	public ResponseEntity <List<OrdemDTO>> findOrdemByAtivo(@PathVariable Integer id){
+		 List<OrdemDTO> obj = service.findOrdemByAtivo(id).stream().map(x -> new OrdemDTO(x))
+				 .collect(Collectors.toList());
+		 return ResponseEntity.ok().body(obj);
+	}
 	
 }
